@@ -22,7 +22,7 @@ public class JsonToPokemon {
             pokemon.setId(object.getInt("id"));
             pokemon.setHeight(object.getInt("height"));
             pokemon.setBase_experience(object.getInt("base_experience"));
-            pokemon.setSprite(object.getJSONObject("sprites").getString("front_default"));
+            pokemon.setSprite(object.getJSONObject("sprites").getJSONObject("other").getJSONObject("official-artwork").getString("front_default"));
             pokemon.setSpecies(object.getJSONObject("species").getString("name"));
             JSONArray abilities = object.getJSONArray("abilities");
             List<String> temp_abilities = new ArrayList<>();

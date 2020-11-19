@@ -3,11 +3,10 @@
     <string name="search_string_hint">Search for a Pokemon</string>
     <string name="pokemon_sprite">Pokemon Sprite</string>
     <string name="app_logo">App Logo</string>
-    <string name="name_label">Name:</string>
-    <string name="weight_label">Weight:</string>
-    <string name="height_label">Height:</string>
-    <string name="base_experience_label">Base Experience:</string>
-    <string name="order_label">Order:</string>
-    <string name="species_label">Species:</string>
-    <string name="abilities_label">Abilities:</string>
+    <string name="name_label">Name</string>
+    <string name="weight_height_label">Weight: %1$d | Height: %2$d</string>
+    <string name="base_experience_label">Base Experience</string>
+    <string name="order_label">Order</string>
+    <string name="species_label">Species</string>
+    <string name="abilities_label">Abilities</string>
 </resources>

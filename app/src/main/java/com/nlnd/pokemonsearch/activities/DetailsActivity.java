@@ -25,7 +25,6 @@ public class DetailsActivity extends AppCompatActivity {
     private void setView() {
         TextView name = findViewById(R.id.details_name);
         TextView weight = findViewById(R.id.details_weight);
-        TextView height = findViewById(R.id.details_height);
         TextView baseExperience = findViewById(R.id.details_base_experience);
         TextView order = findViewById(R.id.details_order);
         TextView species = findViewById(R.id.details_species);
@@ -33,20 +32,18 @@ public class DetailsActivity extends AppCompatActivity {
         ImageView image = findViewById(R.id.details_image);
 
         Picasso.get().load(pokemon.getSprite()).into(image);
-        name.setText("Name: " + pokemon.getName());
-        weight.setText("Weight: " + pokemon.getWeight());
-        height.setText("Height: " + pokemon.getHeight());
-        baseExperience.setText("Base Experience: " + pokemon.getBase_experience());
-        order.setText("Order: " + pokemon.getOrder());
-        species.setText("Species: " + pokemon.getSpecies());
-        String abilitiesStr = "";
+        name.setText(pokemon.getName());
+        weight.setText(getString(R.string.weight_height_label, pokemon.getWeight(), pokemon.getHeight()));
+        baseExperience.setText(String.valueOf(pokemon.getBase_experience()));
+        order.setText(String.valueOf(pokemon.getOrder()));
+        species.setText(pokemon.getSpecies());
+        StringBuilder abilitiesStr = new StringBuilder();
         for (int i = 0; i < pokemon.getAbilities().size(); i++) {
-            abilitiesStr += pokemon.getAbilities().get(i);
+            abilitiesStr.append(pokemon.getAbilities().get(i));
             if (i < pokemon.getAbilities().size() - 1) {
-                abilitiesStr += ", ";
+                abilitiesStr.append(", ");
             }
-
         }
-        abilities.setText("Abilities: " + abilitiesStr);
+        abilities.setText(abilitiesStr.toString());
     }
 }
