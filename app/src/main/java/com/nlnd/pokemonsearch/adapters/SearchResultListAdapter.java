@@ -2,12 +2,12 @@ package com.nlnd.pokemonsearch.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
 import com.nlnd.pokemonsearch.R;
+import com.nlnd.pokemonsearch.activities.DetailsActivity;
 import com.nlnd.pokemonsearch.models.Pokemon;
 import com.squareup.picasso.Picasso;
 
@@ -43,6 +44,14 @@ public class SearchResultListAdapter extends ArrayAdapter<Pokemon> {
 
         Picasso.get().load(pokemons.get(position).getSprite()).into(image);
         name.setText(pokemons.get(position).getName());
+        container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailsActivity.class);
+                intent.putExtra("pokemon", pokemons.get(position));
+                context.startActivity(intent);
+            }
+        });
 
         return  listItem;
     }

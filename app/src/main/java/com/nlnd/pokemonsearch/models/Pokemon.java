@@ -1,11 +1,13 @@
 package com.nlnd.pokemonsearch.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class Pokemon {
+public class Pokemon implements Parcelable {
     private int base_experience;
     private int height;
-    private int held_items;
     private int id;
     private boolean is_default;
     private String location_area_encounters;
@@ -16,16 +18,42 @@ public class Pokemon {
     private String species;
     private List<String> abilities;
 
+    public Pokemon() {
+
+    }
+
+    protected Pokemon(Parcel in) {
+        base_experience = in.readInt();
+        height = in.readInt();
+        id = in.readInt();
+        is_default = in.readByte() != 0;
+        location_area_encounters = in.readString();
+        name = in.readString();
+        order = in.readInt();
+        weight = in.readInt();
+        sprite = in.readString();
+        species = in.readString();
+        abilities = in.createStringArrayList();
+    }
+
+    public static final Creator<Pokemon> CREATOR = new Creator<Pokemon>() {
+        @Override
+        public Pokemon createFromParcel(Parcel in) {
+            return new Pokemon(in);
+        }
+
+        @Override
+        public Pokemon[] newArray(int size) {
+            return new Pokemon[size];
+        }
+    };
+
     public int getBase_experience() {
         return base_experience;
     }
 
     public int getHeight() {
         return height;
-    }
-
-    public int getHeld_items() {
-        return held_items;
     }
 
     public int getId() {
@@ -72,10 +100,6 @@ public class Pokemon {
         this.height = height;
     }
 
-    public void setHeld_items(int held_items) {
-        this.held_items = held_items;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -110,5 +134,25 @@ public class Pokemon {
 
     public void setAbilities(List<String> abilities) {
         this.abilities = abilities;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(base_experience);
+        dest.writeInt(height);
+        dest.writeInt(id);
+        dest.writeByte((byte) (is_default ? 1 : 0));
+        dest.writeString(location_area_encounters);
+        dest.writeString(name);
+        dest.writeInt(order);
+        dest.writeInt(weight);
+        dest.writeString(sprite);
+        dest.writeString(species);
+        dest.writeStringList(abilities);
     }
 }

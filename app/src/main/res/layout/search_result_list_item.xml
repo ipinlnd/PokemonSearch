@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="10dp"
-    android:elevation="10dp"
-    card_view:cardBackgroundColor="#ececec"
+    card_view:cardBackgroundColor="#ffffff"
     card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="10dp">
+    card_view:cardElevation="20dp"
+    card_view:cardUseCompatPadding="true"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,16 +19,16 @@
 
         <ImageView
             android:id="@+id/list_item_image"
-            android:layout_width="175dp"
-            android:layout_height="175dp"
-            android:src="@drawable/pokeapi_256" />
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:contentDescription="@string/pokemon_sprite" />
 
         <TextView
             android:id="@+id/list_item_name"
-            android:layout_width="101dp"
-            android:layout_height="56dp"
-            android:layout_marginLeft="10dp"
-            android:text="Ditto"
-            android:textSize="44dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="#000000"
+            android:textSize="16sp"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

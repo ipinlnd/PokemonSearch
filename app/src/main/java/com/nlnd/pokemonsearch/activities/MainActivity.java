@@ -1,21 +1,19 @@
 package com.nlnd.pokemonsearch.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.nlnd.pokemonsearch.R;
@@ -42,15 +40,14 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
 
         EditText searchStringInput = findViewById(R.id.search_string);
-        searchStringInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    startSearch(v.getText().toString());
-                    return true;
-                }
-                return  false;
+        searchStringInput.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                startSearch(v.getText().toString());
+                return true;
             }
+            return  false;
         });
     }
 
@@ -59,25 +56,19 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://pokeapi.co/api/v2/pokemon/" + searchString;
         listView.setAdapter(null);
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                System.out.println(response);
-                Pokemon pokemon = new JsonToPokemon().translate(response);
-                List<Pokemon> pokemons = new ArrayList<>();
-                pokemons.add(pokemon);
-                progressBar.setVisibility(View.GONE);
+        StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
+            System.out.println(response);
+            Pokemon pokemon = new JsonToPokemon().translate(response);
+            List<Pokemon> pokemons = new ArrayList<>();
+            pokemons.add(pokemon);
+            progressBar.setVisibility(View.GONE);
 
-                SearchResultListAdapter searchResultArrayAdapter = new SearchResultListAdapter(activity,
-                        R.layout.search_result_list_item, pokemons);
-                listView.setAdapter(searchResultArrayAdapter);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-                progressBar.setVisibility(View.GONE);
-            }
+            SearchResultListAdapter searchResultArrayAdapter = new SearchResultListAdapter(activity,
+                    R.layout.search_result_list_item, pokemons);
+            listView.setAdapter(searchResultArrayAdapter);
+        }, error -> {
+            System.out.println(error.getMessage());
+            progressBar.setVisibility(View.GONE);
         });
         queue.add(request);
     }
