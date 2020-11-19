@@ -23,6 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
             android:hint="@string/search_string_hint" />
         <ProgressBar
             android:id="@+id/loading"

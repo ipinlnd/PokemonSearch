@@ -1,5 +1,7 @@
 package com.nlnd.pokemonsearch.models;
 
+import java.util.List;
+
 public class Pokemon {
     private int base_experience;
     private int height;
@@ -12,7 +14,7 @@ public class Pokemon {
     private int weight;
     private String sprite;
     private String species;
-    private String[] abilities;
+    private List<String> abilities;
 
     public int getBase_experience() {
         return base_experience;
@@ -58,7 +60,55 @@ public class Pokemon {
         return species;
     }
 
-    public String[] getAbilities() {
+    public List<String> getAbilities() {
         return abilities;
+    }
+
+    public void setBase_experience(int base_experience) {
+        this.base_experience = base_experience;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setHeld_items(int held_items) {
+        this.held_items = held_items;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setIs_default(boolean is_default) {
+        this.is_default = is_default;
+    }
+
+    public void setLocation_area_encounters(String location_area_encounters) {
+        this.location_area_encounters = location_area_encounters;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setSprite(String sprite) {
+        this.sprite = sprite;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    public void setAbilities(List<String> abilities) {
+        this.abilities = abilities;
     }
 }

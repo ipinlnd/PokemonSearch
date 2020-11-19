@@ -12,9 +12,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 
 import com.nlnd.pokemonsearch.R;
 import com.nlnd.pokemonsearch.models.Pokemon;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -37,8 +39,9 @@ public class SearchResultListAdapter extends ArrayAdapter<Pokemon> {
 
         ImageView image = listItem.findViewById(R.id.list_item_image);
         TextView name = listItem.findViewById(R.id.list_item_name);
-        LinearLayout container = listItem.findViewById(R.id.list_item_container);
+        CardView container = listItem.findViewById(R.id.list_item_container);
 
+        Picasso.get().load(pokemons.get(position).getSprite()).into(image);
         name.setText(pokemons.get(position).getName());
 
         return  listItem;
