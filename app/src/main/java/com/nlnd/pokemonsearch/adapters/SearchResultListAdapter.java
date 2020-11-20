@@ -42,15 +42,12 @@ public class SearchResultListAdapter extends ArrayAdapter<Pokemon> {
         TextView name = listItem.findViewById(R.id.list_item_name);
         CardView container = listItem.findViewById(R.id.list_item_container);
 
-        Picasso.get().load(pokemons.get(position).getSprite()).into(image);
+        Picasso.get().load(pokemons.get(position).getSprite()).placeholder(R.drawable.spinner).into(image);
         name.setText(pokemons.get(position).getName());
-        container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, DetailsActivity.class);
-                intent.putExtra("pokemon", pokemons.get(position));
-                context.startActivity(intent);
-            }
+        container.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetailsActivity.class);
+            intent.putExtra("pokemon", pokemons.get(position));
+            context.startActivity(intent);
         });
 
         return  listItem;

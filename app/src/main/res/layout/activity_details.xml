@@ -63,13 +63,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/base_experience_label"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
                     android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/details_base_experience"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:textSize="18sp"/>
             </LinearLayout>
             <LinearLayout
@@ -83,13 +81,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/order_label"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
                     android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/details_order"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:textSize="18sp"/>
             </LinearLayout>
             <LinearLayout
@@ -103,13 +99,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/species_label"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
                     android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/details_species"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:textSize="18sp"/>
             </LinearLayout>
             <LinearLayout
@@ -123,13 +117,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/abilities_label"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
                     android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/details_abilities"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:textSize="18sp"/>
             </LinearLayout>
         </LinearLayout>

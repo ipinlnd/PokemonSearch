@@ -10,6 +10,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonToPokemon {
+
+    public List<String> getUrlList(String json, String searchString) {
+        try {
+            List<String> urls = new ArrayList<>();
+            JSONObject object = new JSONObject(json);
+            JSONArray result = object.getJSONArray("results");
+            for (int i = 0; i < result.length(); i++) {
+                String name = result.getJSONObject(i).getString("name");
+                if (name.startsWith(searchString)) {
+                    urls.add(result.getJSONObject(i).getString("url"));
+                }
+            }
+            return urls;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public Pokemon translate(String json) {
         Pokemon pokemon = new Pokemon();
         try {

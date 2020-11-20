@@ -12,12 +12,9 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.nlnd.pokemonsearch.R;
-import com.nlnd.pokemonsearch.Utils.JsonToPokemon;
+import com.nlnd.pokemonsearch.Utils.Network;
+
 import com.nlnd.pokemonsearch.adapters.SearchResultListAdapter;
 import com.nlnd.pokemonsearch.models.Pokemon;
 
@@ -25,15 +22,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
     ListView listView;
     ProgressBar progressBar;
     Activity activity;
+    Network network;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         activity = this;
+        network = new Network(this);
+
         listView = findViewById(R.id.search_result_list_view);
 
         progressBar = findViewById(R.id.loading);
@@ -53,23 +53,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void startSearch(String searchString) {
         progressBar.setVisibility(View.VISIBLE);
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://pokeapi.co/api/v2/pokemon/" + searchString;
-        listView.setAdapter(null);
-        StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
-            System.out.println(response);
-            Pokemon pokemon = new JsonToPokemon().translate(response);
-            List<Pokemon> pokemons = new ArrayList<>();
-            pokemons.add(pokemon);
-            progressBar.setVisibility(View.GONE);
+        listView.setAdapter(null);;
+        List<Pokemon> pokemons = new ArrayList<>();
 
-            SearchResultListAdapter searchResultArrayAdapter = new SearchResultListAdapter(activity,
-                    R.layout.search_result_list_item, pokemons);
-            listView.setAdapter(searchResultArrayAdapter);
-        }, error -> {
-            System.out.println(error.getMessage());
-            progressBar.setVisibility(View.GONE);
+        SearchResultListAdapter searchResultArrayAdapter = new SearchResultListAdapter(activity,
+                R.layout.search_result_list_item, pokemons);
+        listView.setAdapter(searchResultArrayAdapter);
+        network.searchList(searchString, urls -> {
+            for (String url: urls) {
+                network.fetchPokemon(url, pokemon -> {
+                    pokemons.add(pokemon);
+                    searchResultArrayAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.GONE);
+                });
+            }
         });
-        queue.add(request);
     }
 }
