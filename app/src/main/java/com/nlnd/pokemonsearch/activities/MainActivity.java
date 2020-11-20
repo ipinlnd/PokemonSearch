@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
                 R.layout.search_result_list_item, pokemons);
         listView.setAdapter(searchResultArrayAdapter);
         network.searchList(searchString, urls -> {
+            if (urls.size() == 0) {
+                progressBar.setVisibility(View.GONE);
+            }
             for (String url: urls) {
                 network.fetchPokemon(url, pokemon -> {
                     pokemons.add(pokemon);
