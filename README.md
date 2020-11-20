@@ -8,10 +8,8 @@ The user can enter a search string in the text box, and get a list of pokemons w
 
 ### Light
 
-<img src="./main_light.jpg" />
-<img src="./details_light.jpg" />
+<img width="200px" src="./main_light.jpg" /> <img width="200px" src="./details_light.jpg" />
 
 ### Dark
 
-<img src="./main_dark.jpg" />
-<img src="./details_dark.jpg" />
+<img width="200px" src="./main_dark.jpg" /> <img width="200px" src="./details_dark.jpg" />
